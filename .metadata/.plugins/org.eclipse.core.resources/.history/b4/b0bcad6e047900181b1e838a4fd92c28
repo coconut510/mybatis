@@ -1,0 +1,12 @@
+package org.kh.student.model.vo;
+
+import java.sql.Date;
+
+public class Student {
+	private int studentNo;
+	private String studentName;
+	private String studentTel;
+	private String studentEmail;
+	private String studentAddr;
+	private Date regDate;
+}

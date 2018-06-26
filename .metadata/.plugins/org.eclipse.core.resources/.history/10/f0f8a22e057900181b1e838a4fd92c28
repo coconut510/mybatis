@@ -1,0 +1,6 @@
+package org.kh.student.model.service;
+
+public interface StudentService {
+	public Student selectStudent();// 1명의 정보를 리턴하는 추상 메소드
+	public int insertStudent();// 1명의 정보를 입력하는 추상 메소드
+}

@@ -1,0 +1,8 @@
+package org.kh.student.model.vo;
+
+public class Student {
+	private int studentNo;
+	private String studentName;
+	private String studentTel;
+	private String studentEmail;
+}

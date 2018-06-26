@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>내가 만든 기본 페이지</h1>
+	<a href="/mybatisTest1">1. mybatis를 이용한 insert 해보기</a><br>
+	
+</body>
+</html>
