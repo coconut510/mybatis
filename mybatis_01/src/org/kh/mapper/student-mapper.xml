@@ -10,4 +10,29 @@
 	<insert id="test3" parameterType="org.kh.student.model.vo.Student">
 		insert into student values(seq_student.nextval,#{studentName},#{studentTel},#{studentEmail},#{studentAddr},default)
 	</insert>
+	<update id="test4" parameterType="org.kh.student.model.vo.Student">
+		update student set 
+		student_name = #{studentName},student_tel = #{studentTel},
+		student_email = #{studentEmail}, student_addr = #{studentEmail} 
+		where student_no=#{studentNo}
+	</update>
+	<delete id="test5" parameterType="org.kh.student.model.vo.Student">
+		delete student where student_no = #{studentNo}
+	</delete>
+	<select id="test6" resultType="org.kh.student.model.vo.Student">
+		select student_no as studentNo,
+				student_name as studentName,
+				student_tel as studentTel,
+				student_email as studentEmail,
+				student_addr as studentAddr
+	 	from student where student_no=#{studentNo}
+	</select>
+	<select id="test7" resultType="org.kh.student.model.vo.Student">
+		select student_no as studentNo,
+				student_name as studentName,
+				student_tel as studentTel,
+				student_email as studentEmail,
+				student_addr as studentAddr
+	 	from student
+	</select>
 </mapper>

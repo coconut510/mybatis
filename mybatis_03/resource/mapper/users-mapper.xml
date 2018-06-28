@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="users">
+	<select id="checkList" parameterType="org.kh.users.model.vo.Check" resultType="org.kh.users.model.vo.User">
+		select 
+				user_no as userNo,			
+			<if test="chId!=null and chId.equals('on')">
+				user_id as userId,
+			</if>
+			<if test="chPw!=null and chId.equals('on')">
+				user_pw as userPw,
+			</if>
+			<if test="chName!=null and chId.equals('on')">
+				user_name as userName,
+			</if>
+			<if test="chAddr!=null and chId.equals('on')">
+				user_addr as userAddr,
+			</if>
+				reg_date as regDate
+		from usertbl
+	</select>
+	<select id="searchList" parameterType="search" resultType="user">
+		select 
+				user_no as userNo,			
+				user_id as userId,
+				user_pw as userPw,
+				user_name as userName,
+				user_addr as userAddr,
+				reg_date as regDate
+		from usertbl
+		<choose>
+			<when test="select.equals('name')">
+				where user_name like '%'||#{keyword}||'%'
+			</when>
+			<when test="select.equals('id')">
+				where user_id like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
+	
+	<select id="search2List" parameterType="user" resultType="user">
+		select 
+				user_no as userNo,			
+				user_id as userId,
+				user_pw as userPw,
+				user_name as userName,
+				user_addr as userAddr,
+				reg_date as regDate 
+		from usertbl
+		<trim prefix="WHERE" prefixOverrides="AND/OR">
+			<!-- if문을 이용하여 주소와 이름을 가지고 회원을 검색한다면? -->
+			<if test="userName!=null and userName!=''">
+				user_name like '%'||#{userName}||'%'
+			</if>
+			<if test="userAddr!=null and userAddr!=''">
+				user_addr like '%'||#{userAddr}||'%'
+			</if>
+		</trim>
+		
+		<!-- 
+			prefix 뜻
+			trim 안에 있는 조건들이 성립되면 쿼리문을 추가할때
+			prefix에 있는 값이 자동으로 붙게 됨
+			단, 쿼리문의 시작값이 and 또는 or일 경우
+			prefixOverrides에 값과 일치할 경우 자동으로 제거 됨 
+		 -->
+	</select>
+</mapper>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper  namespace="users">
+	<select id="checkId" resultType="org.kh.user.model.vo.User">
+		select 
+		user_id as userId,
+		user_pw as userPw,
+		user_nick as userNick,
+		user_tel as userTel 
+		from users where user_id = #{userId}
+	</select>
+	<select id="selecUser" resultType="org.kh.user.model.vo.User" >
+		select 
+		user_id as userId,
+		user_pw as userPw,
+		user_nick as userNick,
+		user_tel as userTel 
+		from users where user_id= #{userId} and user_pw=#{userPw}
+	</select>
+	<insert id ="insertUser" parameterType="org.kh.user.model.vo.User">
+		insert into users values( #{userId}, #{userPw}, #{userNick},#{userTel},default)
+	</insert>
+	<update id="editUser" parameterType="org.kh.user.model.vo.User">
+		update users set user_pw = #{userPw}, user_nick = #{userNick}, user_tel = #{userTel} where user_id=#{userId}
+	</update>
+	<delete id="deleteUser" parameterType="org.kh.user.model.vo.User">
+		delete users where user_id= #{userId} and user_pw=#{userPw}
+	</delete>
+	<select id="selectList" resultType="org.kh.user.model.vo.User">
+		select 
+			user_id as userId,
+			user_nick as userNick,
+			user_tel as userTel 
+		from users
+	</select>
+</mapper>

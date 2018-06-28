@@ -49,6 +49,7 @@ public class MybatisTest3Servlet extends HttpServlet {
 		}
 		else
 		{
+			
 			response.getWriter().println("실패");
 		}
 	}

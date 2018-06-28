@@ -2,6 +2,7 @@ package org.kh.student.model.service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -100,6 +101,45 @@ public class StudentServiceImpl implements StudentService{
 		}
 		
 		return result;
+	}
+
+	public int updateStudent(Student vo) {
+		SqlSession session = getSqlSession();
+		int result = new StudentDAOImpl().updateStudent(session, vo);
+		if(result>0)
+		{
+			session.commit();
+		}
+		else {
+			session.rollback();
+		}
+		return result;
+	}
+
+	public int deleteUser(int studentNo) {
+		SqlSession session = getSqlSession();
+		int result = new StudentDAOImpl().deleteuser(session, studentNo);
+		if(result>0)
+		{
+			session.commit();
+		}
+		else
+		{
+			session.commit();
+		}
+		return result;
+	}
+
+	public Student selectOneStudent(int studentNo) {
+		SqlSession session = getSqlSession();
+		Student std = new StudentDAOImpl().selectOneStudent(session,studentNo);
+		return std;
+	}
+
+	public ArrayList<Student> selectAllStudent() {
+		SqlSession session = getSqlSession();
+		ArrayList<Student> list = new StudentDAOImpl().selectAllStudent(session);
+		return list;
 	}
 	
 }

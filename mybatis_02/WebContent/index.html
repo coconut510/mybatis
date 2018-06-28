@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>마이바티스 실습하기</title>
+</head>
+<body>
+	<hr>
+	1. 회원 ID를 입력하여 해당 회원이 존재하는지 확인(ID 검증 용도)<br>
+	- 있으면 사용 불가 출력, 없으면 사용 가능 출력<br>
+	<form action="/mybatisVer2Test1" method="post">
+		가입할 아이디 : <input type="text" name="userId"/>
+		<input type="submit" value="체크"/><br>
+	</form>
+	<hr>
+	2. 회원 ID, PW를 이용하여 회원정보 가져오기<br>
+	- ID와 PW가 일치하는 회원에 대형 정보 가져와서 VIEW Page를 이용하여 출력하기<br>
+	- 모든 정보 출력(EL 사용)<br>
+	<form action="/mybatisVer2Test2" method="post">
+		찾을 ID 입력 : <input type="text" name="userId"/><br>
+		찾을 PW 입력 : <input type="password" name="userPw"/><br>
+		<input type="submit" value="찾기"/>
+	</form>
+	<hr>
+	3. 회원 가입 만들어 보기<br>
+	- ID, PW, 닉네임, 전화번호 입력받아 insert 처리<br>
+	<form action="/mybatisVer2Test3" method="post">
+		ID : <input type="text" name="userId"/><br>
+		PW : <input type="password" name="userPw"/><br>
+		닉넴: <input type="text" name="userNick"/><br>
+		전번: <input type="text" name="userTel"/><br>
+		<input type="submit" value="아이디 생성"/>
+	</form>
+	<hr>
+	4. 회원 정보 수정 하기<br>
+	- ID, PW를 넘겨받아 회원 정보를 가져온후<br>
+	- 정보수정후 변경하기 버튼을 클릭시 변경하기 (단, PW, 닉네임, 전화번호만 바꿀 수 있음)
+	<form action="/userEditInfo" method="post">
+		ID : <input type="text" name="userId"/><br>
+		PW : <input type="password" name="userPw"/><br>
+		<input type="submit" value="정보가져오기"/>
+	</form>
+	<hr>
+	5. ID, PW를 입력받아 회원 탈퇴 처리하기
+	<form action="/userDelete" method="post">
+		찾을 ID 입력 : <input type="text" name="userId"/><br>
+		찾을 PW 입력 : <input type="password" name="userPw"/><br>
+		<input type="submit" value="삭제"/>
+	</form>
+	<hr>
+	6. 전체 회원 정보 출력하기
+	<a href="/userListAll">회원 전체 정보 출력</a>
+	<hr>	
+</body>
+</html>
