@@ -28,4 +28,10 @@ public class UsersService {
 		ArrayList<User> list = new UsersDAO().search2UserList(session, user);
 		return list;
 	}
+
+	public ArrayList<User> search3UserList(String[] addr) {
+		SqlSession session = SqlSessionTemplate.getSqlSession();
+		ArrayList<User> list = new UsersDAO().search3UserList(session, addr);
+		return list;
+	}
 }

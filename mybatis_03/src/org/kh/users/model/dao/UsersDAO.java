@@ -25,4 +25,9 @@ public class UsersDAO {
 		return (ArrayList<User>)list;
 	}
 
+	public ArrayList<User> search3UserList(SqlSession session, String[] addr) {
+		List list = session.selectList("users.search3List", addr);
+		return (ArrayList<User>)list;
+	}
+
 }

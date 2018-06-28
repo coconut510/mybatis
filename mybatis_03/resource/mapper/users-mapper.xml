@@ -47,13 +47,13 @@
 				user_addr as userAddr,
 				reg_date as regDate 
 		from usertbl
-		<trim prefix="WHERE" prefixOverrides="AND/OR">
+		<trim prefix="WHERE" prefixOverrides="AND|OR">
 			<!-- if문을 이용하여 주소와 이름을 가지고 회원을 검색한다면? -->
 			<if test="userName!=null and userName!=''">
 				user_name like '%'||#{userName}||'%'
 			</if>
 			<if test="userAddr!=null and userAddr!=''">
-				user_addr like '%'||#{userAddr}||'%'
+				and user_addr like '%'||#{userAddr}||'%'
 			</if>
 		</trim>
 		
@@ -64,5 +64,18 @@
 			단, 쿼리문의 시작값이 and 또는 or일 경우
 			prefixOverrides에 값과 일치할 경우 자동으로 제거 됨 
 		 -->
+	</select>
+	<select id="search3List" resultType="user">
+		select 
+			user_no as userNo,			
+			user_id as userId,
+			user_pw as userPw,
+			user_name as userName,
+			user_addr as userAddr,
+			reg_date as regDate  
+		from usertbl where user_addr In
+		<foreach item="addr" collection="array" open="(" separator="," close=")">
+			#{addr}
+		</foreach>
 	</select>
 </mapper>
