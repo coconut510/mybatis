@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="members">
+	<select id="memberLogin" resultType="member" parameterType="member">
+		select 
+			member_no as memberNo,
+			member_id as memberId,
+			member_pw as memberPw,
+			member_name as memberName,
+			member_addr as memberAddr,
+			gender as gender,
+			hobby as hobby,
+			reg_date as regDate
+		from member
+		where member_id= #{memberId} and member_pw = #{memberPw}
+	</select>
+	<update id="memberInfoEdit" parameterType="member">
+		update member set member_pw = #{memberPw} where member_id= #{memberId}
+	</update>
+	<delete id="memberDelete">
+		delete member where member_id=#{memberId}
+	</delete>
+	<select id="memberAllList" resultType="member">
+		select 
+			member_no as memberNo,
+			member_id as memberId,
+			member_pw as memberPw,
+			member_name as memberName,
+			member_addr as memberAddr,
+			gender as gender,
+			hobby as hobby,
+			reg_date as regDate
+		from member
+	</select>
+	
+	<select id="memberChooseList" resultType="member" parameterType="search">
+		select 
+			member_no as memberNo,
+			member_id as memberId,
+			member_pw as memberPw,
+			member_name as memberName,
+			member_addr as memberAddr,
+			gender as gender,
+			hobby as hobby,
+			reg_date as regDate
+		from member
+		<choose>
+			<when test="select.equals('name')">
+				where member_name like '%'||#{keyword}||'%'
+			</when>
+			<when test="select.equals('id')">
+				where member_id like '%'||#{keyword}||'%'
+			</when>
+			<when test="select.equals('addr')">
+				where member_addr like '%'||#{keyword}||'%'
+			</when>
+		</choose>
+	</select>
+
+	
+	<select id="memberSearchCheck1" resultType="member" parameterType="check">
+		select 
+			member_no as memberNo,
+			member_id as memberId,
+			member_pw as memberPw,
+			<if test="chName!=null and chName.equals('on')">
+				member_name as memberName,
+			</if>
+			<if test="chAddr!=null and chAddr.equals('on')">
+				member_addr as memberAddr,
+			</if>
+			<if test="chGender!=null and chGender.equals('on')">
+				gender as gender,
+			</if>
+			<if test="chHobby!=null and chHobby.equals('on')">
+				hobby as hobby,
+			</if>
+			reg_date as regDate
+		from member
+	</select>
+	
+	<select id="memberSearchCheck2" resultType="member" parameterType="check">
+		select 
+			member_no as memberNo,
+			member_id as memberId,
+			member_pw as memberPw,
+			member_name as memberName,
+			member_addr as memberAddr,
+			gender as gender,
+			hobby as hobby,
+			reg_date as regDate
+		from member	where member_addr In	
+		<foreach item="addr" collection="array" open="(" separator="," close=")">
+			#{addr}
+		</foreach>
+	</select>
+	<insert id="memberJoin" parameterType="member">
+		insert into member values(
+			seq_member.nextval,
+			#{memberId},
+			#{memberPw},
+			#{memberName},
+			#{memberAddr},
+			#{gender},
+			#{hobby},
+			default
+		)
+	</insert>
+</mapper>
