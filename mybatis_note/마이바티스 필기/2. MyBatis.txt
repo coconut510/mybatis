@@ -1,0 +1,134 @@
+@ Mybatis
+-> 데이터의 입력, 조회, 수정, 삭제(CRUD) 를 보다 편하게 하기 위해 xml 로 구조화 하여
+Mapper 설정 파일을 통해서 JDBC 를 구현한 영속성 프레임 워크
+-> 기존에 JDBC를 통해 구현했던 상당 부분의 코드와 파라미터 설정 및 결과 매핑을
+xml 설정을 통해 쉽게 구현할 수 있게 해줌
+
+
+* Mybatis API 사이트
+-> http://www.mybatis.org/mybatis-3/ko
+
+
+@ Mybatis 의 사용
+-> 이전 JDBC Template를 통해 DB에 접근 및 SQL 을실행 하였다면 이 코드를
+Mybatis 전용 라이브러리를 통해 대체 한다고 생각 하면 슁ㅁ
+
+
+@ ibatis와 Mybatis
+-> 기존 Apache Project에서 ibatis를 운영하던 팀이 2010년 5월 9일에 Google팀으로 이동
+하면서 Mybatis로 이름을 변경하였음
+-> Mybatis는 기존의 ibatis의 한계점이었던 동적 쿼리와 이노테이션 처리를 보강하여
+더 나은 기능을 제공하고 있음
+-> ibatis는 현재 비활성화 상태이며, 기존에 ibatis로 만들어진 애플리케이션의 자원을
+위해 라이브러리만 제공하고 있음
+
+* Mybatis 라이브러리 다운 및 연동
+-> https://github.com/mybatis/mybatis-3/releases
+
+
+
+window - preferences - Xml - Xml Catalog - add
+
+Location - http://mybatis.org/dtd/mybatis-3-config.dtd
+Key type : public ID
+key - -//mybatis.org//DTD Config 3.0//EN
+
+Location - http://mybatis.org/dtd/mybatis-3-mapper.dtd
+Key type : public ID
+key - -//mybatis.org//DTD Mapper 3.0//EN
+
+
+여기 적기
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration></configuration>
+
+
+@ Mybatis 맛보기
+-> 최대한 스프링 구조와 비슷하게 만들도록 하겠음.
+-> Service, DAO를 생성할때 interface를 제작하여 생성하도록 하겠음.
+
+-> Mybatis 맛보기를 통하여 Mybatis의 사용법 및 DB에 기본적인 데이터를
+삽입하는 방법을 익히도록 하겠음
+
+
+
+
+@데이터를 전달받아서 SQL 구문에 넣는 방법
+
+1. 단일 데이터인 경우
+	#{변수명} 으로 처리 하면 됨
+* 이때, 사실 변수명은 중요하지 않음
+	(넘겨주는 데이터가 1개 이기 때문에 변수명의 역할은 크게 없음)
+
+ex)
+
+session.insert("student.test2", studentName);
+
+
+mapper.xml 에서
+
+<insert id="test2">
+	insert into student values(seq_student.nextval, #{studentName},
+		'01042232223','page@kh.org','경기도 안양시',default)
+</insert>
+
+* 즉, 넘겨주는 것은 studentName 이지만 어차피 값이 하나라서 처리되는 이름은
+아무거나 적어도 됨(하지만 가독성이 떨어지므로 똑같은 이름을 적는것을 권장함)
+
+2. 다중 데이터라면? (2개 이상의 데이터 처리)
+-> 다중 데이터는 인자값을 여러개 적어서 처리할 수 없음
+-> 즉, session.insert() 메소드로 사용할때
+	session.insert("student.teste2", studentName, studentTel,....);
+형태는 불가능함
+-> 방법은? VO 객체에 담아서  VO 자체로 넘겨주는 방법을 사용하면 됨
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
